@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "EditorConfig.EditorConfig",
+    "esbenp.prettier-vscode",
+    "kamikillerto.vscode-colorize",
+    "aaron-bond.better-comments",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+    "yoavbls.pretty-ts-errors",
+    "styled-components.vscode-styled-components",
+    "WallabyJs.console-ninja",
+    "wix.vscode-import-cost",
+    "tonybaloney.vscode-pets",
+    "redhat.vscode-xml"
+  ]
+}

@@ -1,0 +1,4 @@
+!.jest
+/node_modules
+/.next
+/.husky
