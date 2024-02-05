@@ -1,6 +1,6 @@
 {
   "name": "ultimate-corpo-boilerplate-next-js",
-  "version": "0.0.3",
+  "version": "0.0.4-beta-c137",
   "private": true,
   "scripts": {
     "dev": "next dev",

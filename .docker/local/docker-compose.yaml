@@ -10,7 +10,7 @@ services:
   ultimate-corpo-next-js-boilerplate:
     build:
       context: ../../
-      dockerfile: .docker/development/Dockerfile
+      dockerfile: .docker/local/Dockerfile
     image: ultimate-corpo-next-js-boilerplate:local
     container_name: ultimate-corpo-next-js-boilerplate
     networks:
