@@ -13,8 +13,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY  . .
 
-# use your dev env api url here to build the image for the env
-# ex: http://dev.example.com/api / leave localhost for build image locally
+# use your dev env api url here to build the image for the other environments
+# ex: http://dev.example.com/api / localhost for build image locally
 ENV NEXT_PUBLIC_NEXT_API_URL http://localhost:3000/api
 # NEXT_PUBLIC_USER_NONCE needs to be the same from environment variables
 # probably set from a key vault or secrets manager for this environment used in the pipeline

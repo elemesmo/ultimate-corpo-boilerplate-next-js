@@ -1,3 +1,5 @@
+import 'core-js/actual';
+
 import type { Metadata, Viewport } from 'next';
 import { cookies } from 'next/headers';
 import { getServerSession } from 'next-auth';
