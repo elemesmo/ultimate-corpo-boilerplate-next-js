@@ -1,17 +1,20 @@
 {
   "name": "ultimate-corpo-boilerplate-next-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "docker:dev": "cd ./.docker/development && docker-compose up -d",
+    "docker:down": "cd ./.docker/development && docker-compose down",
     "lint": "next lint --max-warnings=0",
     "prepare": "husky install",
     "test": "jest --runInBand --passWithNoTests"
   },
   "dependencies": {
     "@casl/ability": "6.5.0",
+    "@casl/react": "3.1.0",
     "@emotion/cache": "11.11.0",
     "@emotion/is-prop-valid": "1.2.1",
     "@emotion/react": "11.11.3",
@@ -21,6 +24,7 @@
     "@mui/material-nextjs": "5.15.5",
     "@tanstack/react-query": "5.17.19",
     "axios": "1.6.5",
+    "core-js": "3.35.1",
     "deepmerge": "4.3.1",
     "next": "14.0.4",
     "next-auth": "4.24.5",
@@ -33,6 +37,7 @@
     "@tanstack/eslint-plugin-query": "5.17.20",
     "@testing-library/jest-dom": "6.2.0",
     "@testing-library/react": "14.1.2",
+    "@types/core-js": "^2.5.8",
     "@types/jest": "29.5.11",
     "@types/node": "20",
     "@types/react": "18",
@@ -67,7 +72,7 @@
     "whatwg-fetch": "3.6.20"
   },
   "engines": {
-    "npm": ">=10.2.5",
+    "npm": ">=10.2.4",
     "node": ">=20.11.0"
   }
 }

@@ -10,7 +10,11 @@ It comes with Jest, Axios and Next Auth v4 pre-installed and pre-configured. The
 
 The QueryClient feature has a custom ApiBuilder class to take care of the axios instances and has tips for usage with authentication. It comes with a example of internal api usage and comments on how to use it with external apis. Although it's not being used for this example, it's a good practice to wrap all api calls in a react-query hooks (`useQuery`, `useMutation`, etc...) to take advantage of the QueryClient cache and other features.
 
+This project also comes with Casl installed but is not being used. Although it is a easy feature to implement. Based on the Architecture implemented, you would create a new feature called "Casl" or "Abilities" that would hold the hooks, providers, etc... to be used in the rest of the app.
+
 It also comes with this custom Documentation for publishing on a Wiki format that can be improved over time.
+
+Which brings me to the last point, don't forget to update this documentation after you clone the project so you don't have "Boilerplate" documentation on your project. Make it your own!
 
 ## 📁 Folder structure
 
