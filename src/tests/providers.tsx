@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { cookies } from 'next/headers';
 import { PaletteMode } from '@mui/material';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -15,28 +14,39 @@ const mockSession = {
   expires: '2021-01-01T00:00:00.000Z',
 };
 
-const mockCookies = {
+const mockCookies: { [key: string]: string } = {
   userColorMode: 'light',
+  userMenuState: 'open',
 };
+
+export function getCookie<T>(key: string): T {
+  return mockCookies[key] as T;
+}
+
+export function setCookie(key: string, value: string) {
+  mockCookies[key] = value;
+}
 
 jest.mock('next/headers', () => {
   return {
     cookies: () => ({
-      get: (key: keyof typeof mockCookies) => ({
-        value: mockCookies[key],
-      }),
+      get: getCookie,
+      set: setCookie,
     }),
   };
 });
 
 export function JestThemeProvider({ children }: { children: React.ReactNode }) {
-  const cookieStore = cookies();
-  const colorMode = cookieStore.get('userColorMode')?.value as
-    | PaletteMode
-    | undefined;
+  const colorMode = getCookie('userColorMode') as PaletteMode | undefined;
 
   return (
-    <Providers session={mockSession} jest colorMode={colorMode}>
+    <Providers
+      setCookie={setCookie}
+      getCookie={getCookie}
+      colorMode={colorMode}
+      session={mockSession}
+      jest
+    >
       {children}
     </Providers>
   );

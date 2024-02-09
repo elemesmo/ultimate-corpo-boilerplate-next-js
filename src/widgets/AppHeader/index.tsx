@@ -1,11 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
-import { LightMode } from '@mui/icons-material';
-import DarkMode from '@mui/icons-material/DarkMode';
 import MenuIcon from '@mui/icons-material/Menu';
-import { IconButton, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
-import { useColorMode } from '~/features';
+import { ThemeButton } from '~/features';
 
 import {
   StyledAppBar,
@@ -25,8 +23,6 @@ export function AppHeader({
   open?: boolean;
   toggleMenu?: () => void;
 }) {
-  const colorMode = useColorMode();
-
   return (
     <StyledAppBar {...props} position="absolute" open={open}>
       <StyledToolbar>
@@ -54,14 +50,7 @@ export function AppHeader({
           </StyledLeftBox>
 
           <StyledRightBox>
-            <IconButton
-              aria-label="change theme"
-              onClick={colorMode.toggleColorMode}
-              sx={{ color: 'inherit' }}
-              data-testid="header-theme-button"
-            >
-              {colorMode.palletMode === 'dark' ? <LightMode /> : <DarkMode />}
-            </IconButton>
+            <ThemeButton />
           </StyledRightBox>
         </StyledHeaderContentBox>
       </StyledToolbar>

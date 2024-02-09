@@ -7,10 +7,8 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from '@mui/material/styles';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-import nookies from 'nookies';
 
-import { ColorModeResponse } from '~/app/api/user/color-mode/route';
-import { nextApi } from '~/features/QueryClient';
+import type { GetCookieFunction, SetCookieFunction } from '~/shared';
 
 import { DarkTheme, LightTheme } from '../variations';
 
@@ -22,42 +20,41 @@ export type ThemeProviderProps = Omit<
 > & {
   jest?: boolean;
   colorMode?: PaletteMode;
+  getCookie: GetCookieFunction;
+  setCookie: SetCookieFunction;
 };
 
 export function ThemeProvider({
   children,
   jest = false,
   colorMode,
+  getCookie,
+  setCookie,
   ...props
 }: ThemeProviderProps) {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const userPreference = prefersDarkMode ? 'dark' : 'light';
-  const cookieStore = nookies.get();
-  const cookieColorMode = cookieStore?.userColorMode as PaletteMode | undefined;
   const [mode, setMode] = React.useState<PaletteMode>(
-    cookieColorMode ?? colorMode ?? userPreference
+    colorMode ?? userPreference
   );
 
   React.useEffect(() => {
-    if (!cookieColorMode && !colorMode && mode !== userPreference) {
+    if (!colorMode) {
       setMode(userPreference);
+      setCookie('userColorMode', userPreference);
     }
-  }, [mode, colorMode, userPreference, cookieColorMode]);
+  }, [mode, colorMode, userPreference, setCookie]);
 
   const providerValue = React.useMemo(
     () => ({
       toggleColorMode: async () => {
-        try {
-          const colorUrl = '/user/color-mode';
-          const { data } = await nextApi.post<ColorModeResponse>(colorUrl);
-          setMode(data.nextColorMode);
-        } catch (err) {
-          console.error(err);
-        }
+        const nextColorMode = mode === 'light' ? 'dark' : 'light';
+        setCookie('userColorMode', nextColorMode);
+        setMode(nextColorMode);
       },
       palletMode: mode,
     }),
-    [mode]
+    [mode, setCookie]
   );
 
   const theme = React.useMemo(

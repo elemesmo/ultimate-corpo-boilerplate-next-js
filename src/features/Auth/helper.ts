@@ -1,3 +1,4 @@
+import type { CallbacksOptions } from 'next-auth';
 import CredentialProvider from 'next-auth/providers/credentials';
 
 export async function mockAuthorize() {
@@ -17,3 +18,17 @@ export function MockProvider() {
     authorize: mockAuthorize,
   });
 }
+
+export const singInAuthHandler: CallbacksOptions['signIn'] = ({ user }) => {
+  return !!user;
+};
+
+export const jwtAuthHandler: CallbacksOptions['jwt'] = ({ token }) => {
+  return token;
+};
+
+export const sessionAuthHandler: CallbacksOptions['session'] = ({
+  session,
+}) => {
+  return session;
+};

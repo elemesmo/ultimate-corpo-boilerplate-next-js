@@ -7,7 +7,7 @@ import {
   screen,
 } from '@testing-library/react';
 
-import { JestThemeProvider } from '~/tests/providers';
+import { getCookie, JestThemeProvider, setCookie } from '~/tests/providers';
 
 import { ThemeProvider, useColorMode } from '.';
 
@@ -15,7 +15,7 @@ describe('Themes Feature', () => {
   describe('ThemeProvider', () => {
     it('should render without crashing', () => {
       noWrapperRender(
-        <ThemeProvider>
+        <ThemeProvider setCookie={setCookie} getCookie={getCookie}>
           <Box>Content</Box>
         </ThemeProvider>
       );

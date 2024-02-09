@@ -1,4 +1,5 @@
 import * as Features from '~/features';
+import * as Shared from '~/shared';
 import * as Views from '~/views';
 import * as Widgets from '~/widgets';
 
@@ -22,6 +23,17 @@ describe('Exports', () => {
     it('should not have undefined exports', () => {
       Object.keys(Views).forEach(k => {
         expect(Views).not.toHaveProperty(k, undefined);
+      });
+    });
+  });
+  describe('Shared', () => {
+    it('should have exports', () => {
+      expect(Shared).toEqual(expect.any(Object));
+    });
+
+    it('should not have undefined exports', () => {
+      Object.keys(Shared).forEach(k => {
+        expect(Shared).not.toHaveProperty(k, undefined);
       });
     });
   });

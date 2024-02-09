@@ -1,12 +1,16 @@
 import { screen } from '@testing-library/react';
 
-import { render } from '~/tests/providers';
+import { render, setCookie } from '~/tests/providers';
 
 import { MainLayout } from './Main';
 
-describe('Home Page', () => {
+describe('Main Layout', () => {
   it('should have a root box', () => {
-    render(<MainLayout>Content</MainLayout>);
+    render(
+      <MainLayout session={null} userMenuState setCookie={setCookie}>
+        Content
+      </MainLayout>
+    );
     const root = screen.getByTestId('root-box');
     expect(root).toBeInTheDocument();
   });

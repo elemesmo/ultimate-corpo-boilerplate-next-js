@@ -3,9 +3,10 @@ import 'core-js/actual';
 import type { Metadata, Viewport } from 'next';
 import { cookies } from 'next/headers';
 import { getServerSession } from 'next-auth';
-import { type PaletteMode } from '@mui/material';
+import type { PaletteMode } from '@mui/material';
 
 import { authOptions } from '~/features';
+import { getCookie, setCookie, type UserMenuStateCookie } from '~/shared';
 import { MainLayout } from '~/views';
 
 import { Providers } from './providers';
@@ -35,12 +36,28 @@ export default async function RootLayout({
   const colorMode = cookieStore.get('userColorMode')?.value as
     | PaletteMode
     | undefined;
+  const userMenuStateCookie = cookieStore.get('userMenuState');
+  const userMenuState = userMenuStateCookie
+    ? !!userMenuStateCookie?.value &&
+      (userMenuStateCookie?.value as UserMenuStateCookie) === 'open'
+    : true;
 
   return (
     <html lang="pt-BR">
       <body>
-        <Providers session={session} colorMode={colorMode}>
-          <MainLayout>{children}</MainLayout>
+        <Providers
+          setCookie={setCookie}
+          getCookie={getCookie}
+          session={session}
+          colorMode={colorMode}
+        >
+          <MainLayout
+            session={session}
+            setCookie={setCookie}
+            userMenuState={userMenuState}
+          >
+            {children}
+          </MainLayout>
         </Providers>
       </body>
     </html>

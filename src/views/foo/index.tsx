@@ -4,7 +4,7 @@ import { type Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { Box, Button, Typography } from '@mui/material';
 
-export async function FooView({ session }: { session: Session }) {
+export async function FooView({ session }: { session: Session | null }) {
   return (
     <Box>
       <Typography>Protected Foo</Typography>
